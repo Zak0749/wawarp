@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use wawarp::plugins::{actions::ActionPlugin, camera::CameraPlugin, player::PlayerPlugin};
+use wawarp::{actions::ActionPlugin, camera::CameraPlugin, player::PlayerPlugin};
 
 fn main() {
     App::new()

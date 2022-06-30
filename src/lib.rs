@@ -1,2 +1,3 @@
-pub mod components;
-pub mod plugins;
+pub mod actions;
+pub mod camera;
+pub mod player;
