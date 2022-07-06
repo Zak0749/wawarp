@@ -29,7 +29,7 @@ pub fn atlas_system(
             Direction::None => (sprite.index % 16) - ((sprite.index % 16) % 4),
         } + match ability {
             AbilityState::Idle => 0,
-            AbilityState::Preforming(_) => 16,
+            AbilityState::Preforming => 16,
             AbilityState::Cooldown => 32,
         };
     }

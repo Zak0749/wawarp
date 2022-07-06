@@ -1,0 +1,25 @@
+level = 1
+background="808080"
+width=10
+height=10
+
+[[components]]
+component = "Button"
+id="1x0000"
+x=5
+y=5
+action = { type = "Door", link = "1x0001" }
+
+[[components]]
+component="Door"
+id="1x0001"
+x=3
+y=3
+action = { type = "Button", link = "1x0001" }
+
+[[components]]
+component="Door"
+id="1x0002"
+x=-3
+y=-3
+action={ type = "NextLevel"}

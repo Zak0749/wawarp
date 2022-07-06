@@ -1,9 +1,5 @@
-use super::{
-    ability::{Ability, AbilityState},
-    ability_timer::AbilityTimer,
-    player::Player,
-};
-use crate::actions::actions::Actions;
+use super::{ability::AbilityState, ability_timer::AbilityTimer, player::Player};
+use crate::actions::actions::{Action, Actions};
 use bevy::prelude::*;
 
 pub fn ability_system(
@@ -11,21 +7,20 @@ pub fn ability_system(
     actions: Res<Actions>,
     mut query: Query<(&mut AbilityState, &mut AbilityTimer), With<Player>>,
 ) {
-    let (mut ability, mut ability_timer) = query.single_mut();
+    let (mut ability_state, mut ability_timer) = query.single_mut();
 
-    match ability.as_ref() {
-        AbilityState::Preforming(_) if !actions.preforming_ability() => {
-            *ability = AbilityState::Cooldown;
-            ability_timer.reset();
-        }
-        _ => (),
+    if matches!(ability_state.as_ref(), AbilityState::Preforming)
+        && !actions.preforming(Action::AbilityPreform)
+    {
+        *ability_state = AbilityState::Cooldown;
+        ability_timer.reset();
     }
 
     ability_timer.tick(time.delta());
 
-    if actions.preforming_ability() && ability_timer.finished() {
-        *ability = AbilityState::Preforming(Ability::Still);
+    if actions.preforming(Action::AbilityPreform) && ability_timer.finished() {
+        *ability_state = AbilityState::Preforming;
     } else if ability_timer.finished() {
-        *ability = AbilityState::Idle;
+        *ability_state = AbilityState::Idle;
     }
 }

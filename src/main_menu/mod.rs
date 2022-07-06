@@ -1,35 +1,39 @@
+use crate::state::AppState;
 use bevy::prelude::*;
+
 mod cleanup;
 mod setup;
-mod transform_system;
+mod update;
 
 use crate::ordering::Stage;
-use crate::state::AppState;
 
-pub struct CameraPlugin;
+#[derive(Component, Default)]
+pub struct MainMenuIdentifier;
 
-impl Plugin for CameraPlugin {
+pub struct MainMenuPlugin;
+
+impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut App) {
         app.add_system_set(
-            SystemSet::on_enter(AppState::InGame)
+            SystemSet::on_enter(AppState::MainMenu)
                 .with_system(setup::setup)
                 .label(Stage::PreUpdate)
                 .before(Stage::Update)
                 .before(Stage::PostUpdate),
         )
         .add_system_set(
-            SystemSet::on_exit(AppState::InGame)
+            SystemSet::on_exit(AppState::MainMenu)
                 .with_system(cleanup::cleanup)
                 .label(Stage::PreUpdate)
                 .before(Stage::Update)
                 .before(Stage::PostUpdate),
         )
         .add_system_set(
-            SystemSet::on_update(AppState::InGame)
-                .with_system(transform_system::transform_system)
-                .label(Stage::PostUpdate)
-                .after(Stage::Update)
-                .after(Stage::PreUpdate),
+            SystemSet::on_update(AppState::MainMenu)
+                .with_system(update::update)
+                .label(Stage::Update)
+                .after(Stage::PreUpdate)
+                .before(Stage::PostUpdate),
         );
     }
 }

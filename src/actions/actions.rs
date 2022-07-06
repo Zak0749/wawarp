@@ -7,6 +7,9 @@ pub enum Action {
     AbilityStill,
     AbilityBackward,
     AbilityForward,
+    AbilityPreform,
+    Start,
+    Pause,
 }
 
 #[derive(Default)]
@@ -15,12 +18,6 @@ pub struct Actions(Vec<Action>);
 impl Actions {
     pub fn preforming(&self, action: Action) -> bool {
         self.0.contains(&action)
-    }
-
-    pub fn preforming_ability(&self) -> bool {
-        self.0.contains(&Action::AbilityStill)
-            || self.0.contains(&Action::AbilityBackward)
-            || self.0.contains(&Action::AbilityForward)
     }
 
     pub fn set_preforming(&mut self, action: Action, state: bool) {

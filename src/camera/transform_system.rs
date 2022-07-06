@@ -1,6 +1,6 @@
 use bevy::{prelude::*, render::camera::Camera2d};
 
-use crate::player::player::Player;
+use crate::player::Player;
 
 pub fn transform_system(
     mut set: ParamSet<(
