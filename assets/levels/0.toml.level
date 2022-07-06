@@ -17,9 +17,9 @@ x=3
 y=3
 action = { type = "Button", link = "1x0001" }
 
-[[components]]
-component="Door"
-id="1x0002"
-x=-3
-y=-3
-action={ type = "NextLevel"}
+# [[components]]
+# component="Door"
+# id="1x0002"
+# x=-3
+# y=-3
+# action={ type = "NextLevel"}

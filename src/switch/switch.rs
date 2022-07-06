@@ -2,7 +2,7 @@ use bevy::prelude::{Bundle, Component, SpriteSheetBundle};
 
 use crate::door::DoorId;
 
-use super::SwitchId;
+use super::{state::State, SwitchId};
 
 #[derive(Bundle, Default)]
 pub struct SwitchBundle {
@@ -10,6 +10,7 @@ pub struct SwitchBundle {
 
     pub link: DoorId,
     pub id: SwitchId,
+    pub state: State,
 
     #[bundle]
     pub sprite: SpriteSheetBundle,
